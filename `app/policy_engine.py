@@ -6,7 +6,6 @@ from app.models import (
     RiskLevel,
 )
 
-
 PROMPT_INJECTION_PATTERNS = [
     "ignore previous instructions",
     "bypass policy",
@@ -18,7 +17,16 @@ PROMPT_INJECTION_PATTERNS = [
     "disable guardrails",
 ]
 
-SENSITIVE_FIELDS = {"ssn", "social_security_number", "bank_account", "routing_number", "password", "api_key", "token"}
+SENSITIVE_FIELDS = {
+    "ssn",
+    "social_security_number",
+    "bank_account",
+    "routing_number",
+    "password",
+    "api_key",
+    "token",
+}
+
 HIGH_RISK_DESTINATIONS = {"gmail.com", "yahoo.com", "outlook.com", "dropbox.com", "pastebin.com"}
 PRIVILEGED_ROLES = {"security_admin", "compliance_admin", "hr_admin", "payroll_admin"}
 

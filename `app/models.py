@@ -36,6 +36,12 @@ class ActionType(str, Enum):
     delete_record = "delete_record"
 
 
+class PolicyReason(BaseModel):
+    code: str
+    message: str
+    risk_level: RiskLevel
+
+
 class AgentActionRequest(BaseModel):
     agent_id: str = Field(..., min_length=3, max_length=50, pattern=r"^[a-zA-Z0-9_\-]+$")
     agent_role: str = Field(..., min_length=2, max_length=50, pattern=r"^[a-zA-Z0-9_\- ]+$")
@@ -77,12 +83,6 @@ class AgentActionRequest(BaseModel):
         return value
 
 
-class PolicyReason(BaseModel):
-    code: str
-    message: str
-    risk_level: RiskLevel
-
-
 class AgentActionResponse(BaseModel):
     decision: Decision
     risk_score: int = Field(..., ge=0, le=100)
@@ -90,3 +90,19 @@ class AgentActionResponse(BaseModel):
     redacted_fields: List[str] = []
     approval_required: bool = False
     allowed: bool
+
+
+class TokenRequest(BaseModel):
+    username: str = Field(..., min_length=3, max_length=50)
+    password: str = Field(..., min_length=8, max_length=100)
+
+
+class TokenResponse(BaseModel):
+    access_token: str
+    token_type: str = "bearer"
+
+
+class User(BaseModel):
+    username: str
+    role: str
+    disabled: bool = False
